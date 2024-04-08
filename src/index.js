@@ -46,9 +46,68 @@ app.get('/matematica/sumar',(req,res)=>{ //EndPoint"/saludar"
     let respuesta  = sumar(n1, n2);
     console.log(respuesta);
     res.send(respuesta.toString());
-
-
 })
+
+app.get('/matematica/restar',(req,res)=>{ //EndPoint"/saludar" 
+    res.status(200);
+    let n1 = parseInt(req.query.n1);
+    let n2 = parseInt(req.query.n2);
+    let respuesta  = restar(n1, n2);
+    console.log(respuesta);
+    res.send(respuesta.toString());
+})
+
+app.get('/matematica/multiplicar',(req,res)=>{ //EndPoint"/saludar" 
+    res.status(200);
+    let n1 = parseInt(req.query.n1);
+    let n2 = parseInt(req.query.n2);
+    let respuesta  = multiplicar(n1, n2);
+    console.log(respuesta);
+    res.send(respuesta.toString());
+})
+
+
+app.get('/matematica/multiplicar',(req,res)=>{ //EndPoint"/saludar" 
+    res.status(200);
+    let n1 = parseInt(req.query.n1);
+    let n2 = parseInt(req.query.n2);
+    let respuesta  = multiplicar(n1, n2);
+    console.log(respuesta);
+    res.send(respuesta.toString());
+})
+
+app.get('/matematica/dividir',(req,res)=>{ //EndPoint"/saludar" 
+    
+    let n1 = parseInt(req.query.n1);
+    let n2 = parseInt(req.query.n2);
+    if(n2!=0){
+        res.status(200);
+        let respuesta  = dividir(n1, n2);
+        res.send(respuesta.toString());
+    }else{
+        res.status(404);
+        res.send("ERROR el divisor no es valido ");
+    }
+})
+
+//no funciona esta funcion AAAAAAAAAAAAAAAAAAAAAAAA NO ME ANDAAAA PORQUEEE ME VOY A SUICIDAR 
+app.get('/omdb-wrapper/searchbypage',(req,res)=>{ //EndPoint"/saludar" 
+    let search = req.params.texto;
+    let p = req.params.pagina;
+    
+    let returnStatus = 400; 
+    let returnResult = [];
+    try{
+        returnResult = await OMDBSearchByPage(search, p);
+        returnStatus = 200; 
+    }catch{
+        res.send("ERROR no se encontro la pagina requerida");
+    }
+    res.send(returnResult).send(returnStatus);
+})
+
+
+
 
 app.listen(port,()=>{ 
     console.log(`Exampleapplisteningonport${port}`) 

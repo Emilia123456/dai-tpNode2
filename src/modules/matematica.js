@@ -11,9 +11,18 @@ function restar(x, y) {
 return z;
 }
 
-const multiplicar = (a, b) => { a * b};
+function multiplicar(a, b) {
+    let z=  a * b;
+    return z;
+    
+};
 
-const dividir = (a, b) => { a / b};
+
+function dividir(a, b) {
+    let z=  a / b;
+    return z;
+    
+};
 
 
 
