@@ -28,7 +28,6 @@ app.get('/validarfecha/:ano/:mes/:dia',(req,res)=>{ //EndPoint"/saludar"
     let fecha = `${ano}-${mes}-${dia}`;
     let fechaReal = null;
     fechaReal = Date.parse(fecha)
-    console.log(fechaReal)
     if (fechaReal != null && !isNaN(fechaReal)){
         
         res.status(200);
@@ -38,6 +37,17 @@ app.get('/validarfecha/:ano/:mes/:dia',(req,res)=>{ //EndPoint"/saludar"
         res.send("ERROR la fecha no es valida ");
     }
     
+})
+
+app.get('/matematica/sumar',(req,res)=>{ //EndPoint"/saludar" 
+    res.status(200);
+    let n1 = parseInt(req.query.n1);
+    let n2 = parseInt(req.query.n2);
+    let respuesta  = sumar(n1, n2);
+    console.log(respuesta);
+    res.send(respuesta.toString());
+
+
 })
 
 app.listen(port,()=>{ 
