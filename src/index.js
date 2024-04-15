@@ -128,14 +128,55 @@ app.get('/omdb-wrapper/getbyomdbid', async(req,res)=>{
     try{
         returnResult = await OMDBGetByImdbID(imdbID);
         returnStatus = 200; 
-    }catch{
+    }catch{ 
   
     }
     res.status(returnStatus).send(returnResult);
 })
 
 
+const alumnosArray = [];
+alumnosArray.push(new Alumno("Esteban Dido", "22888444", 20));
+alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51));
+alumnosArray.push(new Alumno("Elba Calao", "32623391", 18));
 
+
+app.get('/alumnos', (req, res) => {
+    res.status(200).json(alumnosArray);
+});
+
+
+app.get('/alumnos/:dni', (req, res) => {
+    const dni = req.params.dni;
+    const alumno = alumnosArray.find(alumno => alumno.dni === dni); 
+    if (alumno) {                          
+        res.status(200).json(alumno);
+    } else {
+        res.status(400).send('Alumno no encontrado');
+    }
+});
+
+
+app.post('/alumnos', (req, res) => {
+    const { username, dni, edad } = req.body;
+    const alumno = new Alumno(username, dni, edad);
+    alumnosArray.push(alumno);
+
+    res.status(201).send('Alumno creado exitosamente.');
+});
+
+
+app.delete('/alumnos', (req, res) => {
+    const { dni } = req.body;
+
+    const index = alumnosArray.findIndex(alumno => alumno.dni === dni);
+    if (index !== -1) {
+        alumnosArray.splice(index, 1);
+        res.status(200).send('Alumno eliminado correctamente.');
+    } else {
+        res.status(404).send('No se encontró ningún alumno con ese DNI.');
+    }
+});
 
 
 app.listen(port,()=>{ 
