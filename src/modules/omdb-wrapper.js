@@ -30,6 +30,7 @@ const OMDBSearchComplete = async(searchText)=>{
 
     const requestString=`http://www.omdbapi.com/?apikey=${APIKEY}&s=${searchText}`;
     console.log(requestString);
+    
     try{
         const responseData = await axios.get(requestString);
         returnObject.datos=responseData.data.Search;

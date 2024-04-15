@@ -90,8 +90,7 @@ app.get('/matematica/dividir',(req,res)=>{ //EndPoint"/saludar"
     }
 })
 
-//no funciona esta funcion AAAAAAAAAAAAAAAAAAAAAAAA NO ME ANDAAAA PORQUEEE ME VOY A SUICIDAR 
-app.get('/omdb-wrapper/searchbypage',(req,res)=>{ //EndPoint"/saludar" 
+app.get('/omdb-wrapper/searchbypage', async(req,res)=>{  
     let search = req.params.texto;
     let p = req.params.pagina;
     
@@ -101,10 +100,41 @@ app.get('/omdb-wrapper/searchbypage',(req,res)=>{ //EndPoint"/saludar"
         returnResult = await OMDBSearchByPage(search, p);
         returnStatus = 200; 
     }catch{
-        res.send("ERROR no se encontro la pagina requerida");
+        
     }
-    res.send(returnResult).send(returnStatus);
+    res.status(returnStatus).send(returnResult);
 })
+
+
+app.get('/omdb-wrapper/searchcomplete', async(req,res)=>{ 
+    let search = req.params.texto;
+    
+    let returnStatus = 400; 
+    let returnResult = [];
+    try{
+        returnResult = await OMDBSearchComplete(searchText);
+        returnStatus = 200; 
+    }catch{
+        //res.send("ERROR no se encontro la pagina requerida");
+    }
+    res.status(returnStatus).send(returnResult);
+})
+
+
+app.get('/omdb-wrapper/getbyomdbid', async(req,res)=>{ 
+    let id = req.params.id;
+    
+    let returnStatus = 400; 
+    let returnResult = [];
+    try{
+        returnResult = await OMDBGetByImdbID(imdbID);
+        returnStatus = 200; 
+    }catch{
+  
+    }
+    res.status(returnStatus).send(returnResult);
+})
+
 
 
 
