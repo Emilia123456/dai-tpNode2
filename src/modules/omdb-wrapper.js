@@ -30,7 +30,7 @@ const OMDBSearchComplete = async(searchText)=>{
 
     const requestString=`http://www.omdbapi.com/?apikey=${APIKEY}&s=${searchText}`;
     console.log(requestString);
-    
+
     try{
         const responseData = await axios.get(requestString);
         returnObject.datos=responseData.data.Search;
@@ -48,13 +48,13 @@ const OMDBGetByImdbID=async(imdbID)=>{
         cantidadTotal:0, 
         datos :{} 
     }; 
-    const requestString=`http://www.omdbapi.com/?apikey=${APIKEY}&s=${imdbID}`;
+    const requestString=`http://www.omdbapi.com/?apikey=${APIKEY}&i=${imdbID}`;
     console.log(requestString);
     try{
         const responseData = await axios.get(requestString);
-        returnObject.datos=JSON.parse(responseData);
+        returnObject.datos=responseData.data;
         returnObject.respuesta=true;
-        returnObject.cantidadTotal=returnObject.datos.totalResults
+        returnObject.cantidadTotal=responseData.data.totalResults
     } catch (error) {
         console.error("ERROR al hacer el request: ", error)
     }

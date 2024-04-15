@@ -107,7 +107,7 @@ app.get('/omdb-wrapper/searchbypage', async(req,res)=>{
 
 
 app.get('/omdb-wrapper/searchcomplete', async(req,res)=>{ 
-    let search = req.params.texto;
+    let searchText = req.query.texto;
     
     let returnStatus = 400; 
     let returnResult = [];
@@ -122,8 +122,7 @@ app.get('/omdb-wrapper/searchcomplete', async(req,res)=>{
 
 
 app.get('/omdb-wrapper/getbyomdbid', async(req,res)=>{ 
-    let id = req.params.id;
-    
+    let imdbID = req.query.id;
     let returnStatus = 400; 
     let returnResult = [];
     try{
